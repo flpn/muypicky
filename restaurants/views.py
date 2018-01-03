@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import RestaurantLocation
 
@@ -20,3 +20,9 @@ class RestaurantsListView(ListView):
             )
         
         return queryset
+
+
+class RestaurantDetailView(DetailView):
+    template_name = 'restaurants/restaurant_detail.html'
+    model = RestaurantLocation
+    
