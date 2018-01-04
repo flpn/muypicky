@@ -1,7 +1,9 @@
 from django.db import models
 from django.conf import settings
+from django.urls import reverse
 
 from restaurants.models import RestaurantLocation
+
 
 class Item(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -15,6 +17,12 @@ class Item(models.Model):
 
     class Meta:
         ordering = ['-updated', '-timestamp']
+
+    def __str__(self):
+        return f'{self.restaurant.name} - {self.name}'
+
+    def get_absolute_url(self):
+        return reverse('menus:item_detail', kwargs={'pk': self.pk})
 
     def get_contents(self):
         return self.contents.split(',')
