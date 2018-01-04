@@ -1,8 +1,9 @@
 from django.db.models import Q
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
 from .models import RestaurantLocation
+from .forms import RestaurantLocationCreateForm
 
 # Create your views here.
 class RestaurantsListView(ListView):
@@ -26,3 +27,8 @@ class RestaurantDetailView(DetailView):
     template_name = 'restaurants/restaurant_detail.html'
     model = RestaurantLocation
     
+
+class RestaurantCreateView(CreateView):
+    form_class = RestaurantLocationCreateForm
+    template_name = 'restaurants/create_restaurant_form.html'
+    success_url = '/restaurants/'
