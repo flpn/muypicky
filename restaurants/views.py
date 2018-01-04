@@ -1,11 +1,12 @@
 from django.db.models import Q
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import RestaurantLocation
 from .forms import RestaurantLocationCreateForm
 
-# Create your views here.
+
 class RestaurantsListView(ListView):
     template_name = 'restaurants/restaurants_list.html'
 
@@ -28,7 +29,7 @@ class RestaurantDetailView(DetailView):
     model = RestaurantLocation
     
 
-class RestaurantCreateView(CreateView):
+class RestaurantCreateView(LoginRequiredMixin, CreateView):
     form_class = RestaurantLocationCreateForm
     template_name = 'restaurants/create_restaurant_form.html'
     success_url = '/restaurants/'
