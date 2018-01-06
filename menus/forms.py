@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Item
+from .models import Item, RestaurantLocation
 
 
 class ItemForm(forms.ModelForm):
@@ -13,3 +13,7 @@ class ItemForm(forms.ModelForm):
             'excludes',
             'public'
         ]
+    
+    def __init__(self, user=None, *args, **kwargs):
+        super(ItemForm, self).__init__(*args, **kwargs)
+        self.fields['restaurant'].queryset = RestaurantLocation.objects.filter(owner=user)
