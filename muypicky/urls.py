@@ -26,4 +26,5 @@ urlpatterns = [
     path('contacts/', TemplateView.as_view(template_name='contacts.html'), name='contacts'),
     path('restaurants/', include('restaurants.urls')),
     path('items/', include('menus.urls')),    
+    path('profile/', include('profiles.urls')),    
 ]
