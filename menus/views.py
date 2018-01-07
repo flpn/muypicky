@@ -40,7 +40,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
 
 class ItemUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ItemForm
-    template_name = 'menus/item_form.html'
+    template_name = 'menus/item_detail.html'
     model = Item
 
     def form_valid(self, form):
