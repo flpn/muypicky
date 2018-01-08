@@ -8,7 +8,7 @@ from .forms import ItemForm
 
 class ItemListView(ListView):
     def get_queryset(self):
-        return Item.objects.all()
+        return Item.objects.filter(user=self.request.user)
 
 
 class ItemDetailView(DetailView):
