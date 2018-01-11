@@ -1,9 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 
 from menus.models import Item
 from restaurants.models import RestaurantLocation
+from .forms import RegisterForm
+
 
 class ProfileDetailView(DetailView):
     template_name = 'profiles/user.html'
@@ -24,3 +26,12 @@ class ProfileDetailView(DetailView):
             context['locations'] = qs
         
         return context
+
+
+class RegisterView(CreateView):
+    form_class = RegisterForm
+    template_name = 'registration/register.html'
+    success_url = '/'
+
+    def dispatch(self, *args, **kwargs):
+        return super(RegisterView, self).dispatch(*args, **kwargs)
